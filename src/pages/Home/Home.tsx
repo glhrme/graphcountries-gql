@@ -1,27 +1,21 @@
 import React from 'react'
 import Wrapper from 'components/WrapperContent'
 import { Grid } from '@material-ui/core'
-import CountryCard, { CountryInfo } from 'components/CountryCard'
-
-const info: CountryInfo = {
-  "name": "Brazil",
-  "nativeName": 'Brasil',
-  "capital": "Brasília",
-  "flag": {
-    "emoji": "🇧🇷",
-    "emojiUnicode": "U+1F1E7 U+1F1F7",
-    "svgFile": "https://restcountries.eu/data/bra.svg"
-  }
-}
+import CountryCard from 'components/CountryCard'
+import CountryInfo from 'shared/types/CountryInfo'
+import { useQuery } from '@apollo/client'
+import CountryInfoQuery, { CountryInfoQueryResponse } from 'config/queries/countryInfo'
 
 const Home = () => {
+  const { data } = useQuery<CountryInfoQueryResponse>(CountryInfoQuery())
+  
   return (
     <Wrapper>
       <div> Linha do Filtro </div>
       <Grid container>
-        {[1,2,3,4,5,6,7,8,8,8,8,8,8,8].map(item => (
+        {data?.Country.map((item: CountryInfo) => (
           <Grid item xs={3} style={{ padding: '8px' }}>
-            <CountryCard countryInfo={info} />
+            <CountryCard countryInfo={item} />
           </Grid>
         ))}
       </Grid>
