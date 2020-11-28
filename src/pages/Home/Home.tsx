@@ -1,10 +1,12 @@
 import React from 'react'
 import { Container } from '@material-ui/core'
-import Header from 'components/Header'
+import Wrapper from 'components/WrapperContent'
 
 const Home = () => {
   return (
-    <Header />
+    <Wrapper>
+      <p>Teste</p>
+    </Wrapper>
   )
 }
 
