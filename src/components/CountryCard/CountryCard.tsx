@@ -1,14 +1,7 @@
 import React from 'react'
 import { Card, CardActions, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Flag from 'shared/types/Flag'
-
-export type CountryInfo = {
-  name: string,
-  nativeName: string,
-  capital: string,
-  flag: Flag
-}
+import CountryInfo from 'shared/types/CountryInfo'
 
 type CountryProps = {
   countryInfo: CountryInfo
