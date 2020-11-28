@@ -1,5 +1,6 @@
 import OfficialLanguages from './OfficialLanguages'
 import Currency from './Currency'
+import Flag from './Flag'
 
 type Country = {
   name: string,
@@ -31,11 +32,7 @@ type Country = {
     otherAcronyms: Array<any>,
     otherNames: Array<any>
   }>,
-  flag: {
-    emoji: string,
-    emojiUnicode: string,
-    svgFile: string
-  },
+  flag: Flag,
   topLevelDomains: Array<{
     name: string
   }>,
