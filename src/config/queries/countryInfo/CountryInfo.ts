@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import CountryInfo from 'shared/types/CountryInfo'
 
 const CountryInfoQuery = () => {
   return gql`
@@ -17,6 +18,10 @@ const CountryInfoQuery = () => {
     }
 
   `
+}
+
+export interface CountryInfoQueryResponse {
+  Country: Array<CountryInfo>
 }
 
 export default CountryInfoQuery
