@@ -1,4 +1,4 @@
-import CountryInfo from "shared/types/CountryInfo"
+import CountryInfo from "shared/types/Country"
 import { actions } from './types'
 
 export const addCountryInfo = (countryInfo: CountryInfo) => ({

@@ -1,4 +1,4 @@
-import CountryInfo from "shared/types/CountryInfo"
+import CountryInfo from "shared/types/Country"
 import { action, actions } from './types'
 
 const infoMapState = new Map<string, CountryInfo>() 

@@ -1,4 +1,4 @@
-import CountryInfo from "shared/types/CountryInfo"
+import CountryInfo from "shared/types/Country"
 
 export enum actions {
   add = '@countryInfo/ADD',
