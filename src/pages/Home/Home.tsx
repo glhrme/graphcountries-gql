@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from 'react'
+import { connect, ConnectedProps } from 'react-redux'
 import Wrapper from 'components/WrapperContent'
 import { Grid } from '@material-ui/core'
 import CountryCard from 'components/CountryCard'
 import CountryInfo from 'shared/types/CountryInfo'
 import { useQuery } from '@apollo/client'
 import CountryInfoQuery, { CountryInfoQueryResponse } from 'config/queries/countryInfo'
+import { infoState, addCountryInfo } from 'store/modules/infoCountries'
 
-const Home = () => {
+const mapStateToProps = (state: infoState) => ({
+  infos: state.InfoReducer
+})
+
+const dispatchProps = {
+  addCountryInfo
+}
+
+const connector = connect(mapStateToProps, dispatchProps)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const Home: React.FC<PropsFromRedux> = (props) => {
   const { data } = useQuery<CountryInfoQueryResponse>(CountryInfoQuery())
-  const [mapInfo, setMapInfo] = useState<Map<string, CountryInfo>>(new Map())
   useEffect(() => {
     data?.Country.map((item: CountryInfo) => {
-      if (!mapInfo.get(item.nativeName)) {
-        return mapInfo.set(item.nativeName, item)
-      }
+      props.addCountryInfo(item)
     })
-    setMapInfo(value => value)
   }, [data])
 
   return (
     <Wrapper>
       <div> Linha do Filtro </div>
       <Grid container>
-        {Array.from(mapInfo.values()).map((item: CountryInfo) => (
-          <Grid item xs={3} style={{ padding: '8px' }}>
+        {props.infos.map((item: CountryInfo) => (
+          <Grid item xs={3} style={{ padding: '8px' }} key={item.nativeName}>
             <CountryCard countryInfo={item} />
           </Grid>
         ))}
@@ -32,4 +42,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default connector(Home)
