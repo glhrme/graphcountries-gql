@@ -11,7 +11,7 @@ const Routes = () => (
       <Route path='/details' exact>
         <Redirect to='' />
       </Route>
-      <Route path='/details/:nativeName' component={Details} />
+      <Route path='/details/:name' component={Details} />
     </Switch>
   </BrowserRouter>
 )

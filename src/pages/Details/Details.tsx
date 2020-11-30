@@ -24,22 +24,22 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux & {
   match: {
     params: {
-      nativeName: string
+      name: string
     }
   }
 }
 
-const Details: React.FC<Props> = ({ match: { params: { nativeName }}, infosMap }) => {
+const Details: React.FC<Props> = ({ match: { params: { name }}, infosMap }) => {
   const [countryInfo, setCountryInfo] = useState<Country>()
   const [opened, setOpened] = useState<boolean>(false)
 
   useEffect(() => {
-    if(infosMap.get(nativeName)) {
-      setCountryInfo(infosMap.get(nativeName))
+    if(infosMap.get(name)) {
+      setCountryInfo(infosMap.get(name))
     } else {
       window.location.href = '/'
     }
-  }, [nativeName])
+  }, [name])
 
   if(countryInfo) {
     return (

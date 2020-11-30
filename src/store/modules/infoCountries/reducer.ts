@@ -11,7 +11,7 @@ const mapInfo: Map<string, Country> = new Map()
 const infoCountries = (state: stateType = initialState, action: action) => {
   switch(action.type) {
     case actions.add: {
-      if (!mapInfo.get(action.countryInfo.nativeName)) mapInfo.set(action.countryInfo.nativeName, action.countryInfo)
+      if (!mapInfo.get(action.countryInfo.name)) mapInfo.set(action.countryInfo.name, action.countryInfo)
       const draft: stateType = {
         arrayState: Array.from(mapInfo.values()),
         mapState: mapInfo
@@ -26,7 +26,7 @@ const infoCountries = (state: stateType = initialState, action: action) => {
         ...draftMap,
         ...action.countryInfo
       }
-      mapInfo.set(draftMap.nativeName, draftMap)
+      mapInfo.set(draftMap.name, draftMap)
       state = {
         mapState: mapInfo,
         arrayState: Array.from(mapInfo.values())

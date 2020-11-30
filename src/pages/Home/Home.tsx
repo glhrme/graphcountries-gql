@@ -54,7 +54,7 @@ const Home: React.FC<PropsFromRedux> = ({ infos, addCountryInfo }) => {
       </FilterWrapper>
       <Grid container>
         {filteredInfos.map((item: CountryInfo) => (
-          <Grid item xs={3} style={{ padding: '8px' }} key={item.nativeName}>
+          <Grid item xs={3} style={{ padding: '8px' }} key={item.name}>
             <CountryCard countryInfo={item} />
           </Grid>
         ))}

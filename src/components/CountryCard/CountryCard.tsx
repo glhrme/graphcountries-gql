@@ -45,7 +45,7 @@ const CountryCard: React.FC<CountryProps> = ({
           size="small"
           color="primary"
         >
-          <Link to={`/details/${countryInfo.nativeName}`}>Detalhes</Link>
+          <Link to={`/details/${countryInfo.name}`}>Detalhes</Link>
         </Button>
       </CardActions>
     </Card>

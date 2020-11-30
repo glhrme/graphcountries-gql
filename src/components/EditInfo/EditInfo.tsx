@@ -29,7 +29,6 @@ type Props = PropsFromRedux & {
 }
 
 const schema = object().shape({
-  name: string().required(),
   nativeName: string().required(),
   capital: string().required(),
   area: number().required(),
@@ -40,7 +39,6 @@ const EditInfo: React.FC<Props> = (props) => {
   const { errors, register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: props.countryInfo.name,
       nativeName: props.countryInfo.nativeName,
       capital: props.countryInfo.capital,
       area: props.countryInfo.area,
@@ -53,20 +51,13 @@ const EditInfo: React.FC<Props> = (props) => {
       ...props.countryInfo,
       ...data
     }
-    props.editCountryInfo(props.countryInfo.nativeName, countryToEdit)
+    props.editCountryInfo(props.countryInfo.name, countryToEdit)
     props.closeModal(true)
     props.update(countryToEdit)
   }
 
   return (
     <CustomForm>
-      <TextField
-        label="Nome"
-        name="name"
-        inputRef={register}
-        error={!!errors.name}
-        helperText={errors?.name?.message}
-      />
       <TextField
         label="Nome Nativo"
         name="nativeName"
