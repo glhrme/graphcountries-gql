@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardActions, CardContent, Typography, CardMedia, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
 import CountryInfo from 'shared/types/Country'
 
 type CountryProps = {
@@ -44,7 +45,7 @@ const CountryCard: React.FC<CountryProps> = ({
           size="small"
           color="primary"
         >
-          Detalhes
+          <Link to={`/details/${countryInfo.nativeName}`}>Detalhes</Link>
         </Button>
       </CardActions>
     </Card>
