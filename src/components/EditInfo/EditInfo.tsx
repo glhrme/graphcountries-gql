@@ -1,11 +1,10 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Button, TextField } from '@material-ui/core'
 import { connect, ConnectedProps } from 'react-redux'
 import { infoState, editCountryInfo } from 'store/modules/infoCountries'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { object, string, number } from 'yup'
-import { Link } from 'react-router-dom'
 import { CustomForm } from './EditInfo.style'
 import Country from 'shared/types/Country'
 
