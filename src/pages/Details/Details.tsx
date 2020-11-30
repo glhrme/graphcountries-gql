@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Divider, Grid, Typography } from '@material-ui/core'
+import { Divider, Grid, Typography, Modal, Button } from '@material-ui/core'
 import { connect, ConnectedProps } from 'react-redux'
 import { infoState } from 'store/modules/infoCountries'
 import WrapperContent from 'components/WrapperContent'
+import EditInfo from 'components/EditInfo'
 import Country from 'shared/types/Country'
 import { WrapperInfo, WrapperImage, WrapperMain } from './Details.style'
 
@@ -29,6 +30,7 @@ type Props = PropsFromRedux & {
 
 const Details: React.FC<Props> = ({ match: { params: { nativeName }}, infosMap }) => {
   const [countryInfo, setCountryInfo] = useState<Country>()
+  const [opened, setOpened] = useState<boolean>(false)
 
   useEffect(() => {
     const searchItem = infosMap.get(nativeName)
@@ -81,10 +83,23 @@ const Details: React.FC<Props> = ({ match: { params: { nativeName }}, infosMap }
                   }
                   </ul>
                 </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setOpened(true)}
+                >
+                  Editar
+                </Button>
               </div>
             </WrapperMain>
           </WrapperInfo>
         </Grid>
+        <Modal
+          open={opened}
+          onClose={() => setOpened(false)}
+        >
+          <EditInfo />
+        </Modal>
       </WrapperContent>
     )
   }
