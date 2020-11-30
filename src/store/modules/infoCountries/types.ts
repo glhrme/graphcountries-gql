@@ -2,12 +2,13 @@ import CountryInfo from "shared/types/Country"
 
 export enum actions {
   add = '@countryInfo/ADD',
-  remove = '@countryInfo/REMOVE'
+  edit = '@countryInfo/EDIT'
 }
 
 export type action = {
   type: actions,
-  countryInfo: CountryInfo
+  countryInfo: CountryInfo,
+  key?: string
 }
 
 export type stateType = {

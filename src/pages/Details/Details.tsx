@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Divider, Grid, Typography, Modal, Button } from '@material-ui/core'
+import { Divider, Grid, Typography, Modal, Button, ButtonGroup } from '@material-ui/core'
 import { connect, ConnectedProps } from 'react-redux'
 import { infoState } from 'store/modules/infoCountries'
 import WrapperContent from 'components/WrapperContent'
 import EditInfo from 'components/EditInfo'
 import Country from 'shared/types/Country'
-import { WrapperInfo, WrapperImage, WrapperMain } from './Details.style'
+import { WrapperInfo, WrapperImage, WrapperMain, WrapperButtonGroup } from './Details.style'
+import { Link } from 'react-router-dom'
 
 const mapStateToProps = (state: infoState) => {
   return ({
@@ -33,13 +34,12 @@ const Details: React.FC<Props> = ({ match: { params: { nativeName }}, infosMap }
   const [opened, setOpened] = useState<boolean>(false)
 
   useEffect(() => {
-    const searchItem = infosMap.get(nativeName)
-    if(searchItem) {
-      setCountryInfo(searchItem)
+    if(infosMap.get(nativeName)) {
+      setCountryInfo(infosMap.get(nativeName))
     } else {
       window.location.href = '/'
     }
-  }, [])
+  }, [nativeName])
 
   if(countryInfo) {
     return (
@@ -83,13 +83,21 @@ const Details: React.FC<Props> = ({ match: { params: { nativeName }}, infosMap }
                   }
                   </ul>
                 </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setOpened(true)}
-                >
-                  Editar
-                </Button>
+                <WrapperButtonGroup>
+                  <ButtonGroup
+                    variant="contained"
+                    color="primary"
+                  >
+                    <Button
+                      onClick={() => setOpened(true)}
+                    >
+                      Editar
+                    </Button>
+                    <Button>
+                      <Link to='/'>Voltar</Link>
+                    </Button>
+                  </ButtonGroup>
+                </WrapperButtonGroup>
               </div>
             </WrapperMain>
           </WrapperInfo>
@@ -105,7 +113,9 @@ const Details: React.FC<Props> = ({ match: { params: { nativeName }}, infosMap }
           onClose={() => setOpened(false)}
         >
           <EditInfo
-            nativeName={nativeName}
+            countryInfo={countryInfo}
+            closeModal={setOpened}
+            update={setCountryInfo}
           />
         </Modal>
       </WrapperContent>

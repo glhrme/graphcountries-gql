@@ -19,6 +19,20 @@ const infoCountries = (state: stateType = initialState, action: action) => {
       state = draft
       return state
     }
+    case actions.edit: {
+      let draftMap = mapInfo.get(action.key!)
+      mapInfo.delete(action.key!)
+      draftMap = {
+        ...draftMap,
+        ...action.countryInfo
+      }
+      mapInfo.set(draftMap.nativeName, draftMap)
+      state = {
+        mapState: mapInfo,
+        arrayState: Array.from(mapInfo.values())
+      }
+      return state
+    }
     default: return state
   }
 }

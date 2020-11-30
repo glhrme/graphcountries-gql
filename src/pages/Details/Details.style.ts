@@ -18,6 +18,15 @@ export const WrapperImage = styled.div`
   }
 `
 
+export const WrapperButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  button, a {
+    color: white;
+    text-decoration: none;
+  }
+`
+
 export const WrapperMain = styled.div`
   width: 300px;
   p {

@@ -6,7 +6,8 @@ export const addCountryInfo = (countryInfo: CountryInfo) => ({
   countryInfo
 })
 
-export const removeCountryInfo = (key: string) => ({
-  type: actions.remove,
-  key
+export const editCountryInfo = (key: string, countryInfo: CountryInfo) => ({
+  type: actions.edit,
+  key,
+  countryInfo
 })
