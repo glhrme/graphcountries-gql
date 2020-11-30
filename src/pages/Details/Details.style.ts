@@ -42,3 +42,25 @@ export const WrapperMain = styled.div`
     }
   }
 `
+
+export const WrapperMap = styled.div`
+  width: 100vw;
+  margin: 8px;
+`
+
+export const MarkerIcon = styled.div`
+  padding: 5px;
+    color: #fff;
+    cursor: pointer;
+    background: #1978c8;
+    border-radius: 6px;
+    font-size: 10px;
+`
+
+export const MarkerMain = styled.div`
+  padding: 10px;
+  color: #fff;
+  cursor: pointer;
+  background: #eb4034;
+  border-radius: 6px;
+`

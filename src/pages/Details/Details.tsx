@@ -5,8 +5,15 @@ import { infoState } from 'store/modules/infoCountries'
 import WrapperContent from 'components/WrapperContent'
 import EditInfo from 'components/EditInfo'
 import Country from 'shared/types/Country'
-import { WrapperInfo, WrapperImage, WrapperMain, WrapperButtonGroup } from './Details.style'
+import {
+  WrapperInfo, WrapperImage,
+  WrapperMain, WrapperButtonGroup,
+  WrapperMap, MarkerIcon, MarkerMain
+} from './Details.style'
 import { Link } from 'react-router-dom'
+import MapGL, { Marker, NavigationControl  } from '@urbica/react-map-gl'
+import key from 'config/key'
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const mapStateToProps = (state: infoState) => {
   return ({
@@ -31,6 +38,7 @@ type Props = PropsFromRedux & {
 
 const Details: React.FC<Props> = ({ match: { params: { name }}, infosMap }) => {
   const [countryInfo, setCountryInfo] = useState<Country>()
+  const [nearbyCountries, setNearbyCountries] = useState<Array<Country>>([])
   const [opened, setOpened] = useState<boolean>(false)
 
   useEffect(() => {
@@ -40,6 +48,14 @@ const Details: React.FC<Props> = ({ match: { params: { name }}, infosMap }) => {
       window.location.href = '/'
     }
   }, [name])
+
+  useEffect(() => {
+    const draft: Country[] = []
+    countryInfo?.distanceToOtherCountries.map((item: any) => {
+      draft.push(infosMap.get(item.countryName)!)
+    })
+    setNearbyCountries(draft)
+  }, [countryInfo])
 
   if(countryInfo) {
     return (
@@ -87,7 +103,7 @@ const Details: React.FC<Props> = ({ match: { params: { name }}, infosMap }) => {
                 <Typography>Paises mais próximos</Typography>
                 <ol>
                   {countryInfo.distanceToOtherCountries.map((item: any) => (
-                    <li>
+                    <li key={item.countryName}>
                       <Typography component="span">{item.countryName} - {item.distanceInKm}Km</Typography>
                     </li>
                   ))}
@@ -109,6 +125,33 @@ const Details: React.FC<Props> = ({ match: { params: { name }}, infosMap }) => {
                 </WrapperButtonGroup>
               </div>
             </WrapperMain>
+            <WrapperMap>
+                <MapGL
+                  style={{ width: '100%', height: '1200px' }}
+                  mapStyle='mapbox://styles/mapbox/light-v9'
+                  accessToken={key}
+                  latitude={countryInfo.location.latitude}
+                  longitude={countryInfo.location.longitude}
+                  zoom={0}
+                >
+                    <Marker
+                      latitude={countryInfo.location.latitude}
+                      longitude={countryInfo.location.longitude}
+                    >
+                      <MarkerMain>{countryInfo.name}</MarkerMain>
+                    </Marker>
+                  {nearbyCountries.map((item: Country) => (
+                    <Marker
+                      key={item.name}
+                      longitude={item.location.longitude}
+                      latitude={item.location.latitude}
+                    >
+                      <MarkerIcon>{item.name}</MarkerIcon>
+                    </Marker>
+                  ))}
+                  <NavigationControl showCompass showZoom position='top-right' />
+                </MapGL>
+            </WrapperMap>
           </WrapperInfo>
         </Grid>
         <Modal
