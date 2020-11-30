@@ -8,9 +8,11 @@ import { useQuery } from '@apollo/client'
 import CountryInfoQuery, { CountryInfoQueryResponse } from 'config/queries/countryInfo'
 import { infoState, addCountryInfo } from 'store/modules/infoCountries'
 
-const mapStateToProps = (state: infoState) => ({
-  infos: state.InfoReducer
-})
+const mapStateToProps = (state: infoState) => {
+  return ({
+    infos: state.InfoReducer
+  })
+}
 
 const dispatchProps = {
   addCountryInfo
@@ -32,7 +34,7 @@ const Home: React.FC<PropsFromRedux> = (props) => {
     <Wrapper>
       <div> Linha do Filtro </div>
       <Grid container>
-        {props.infos.map((item: CountryInfo) => (
+        {props.infos.arrayState.map((item: CountryInfo) => (
           <Grid item xs={3} style={{ padding: '8px' }} key={item.nativeName}>
             <CountryCard countryInfo={item} />
           </Grid>

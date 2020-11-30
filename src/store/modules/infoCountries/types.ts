@@ -10,6 +10,11 @@ export type action = {
   countryInfo: CountryInfo
 }
 
+export type stateType = {
+  mapState: Map<string, CountryInfo>,
+  arrayState: CountryInfo[]
+}
+
 export type infoState = {
-  InfoReducer: CountryInfo[]
+  InfoReducer: stateType
 }
