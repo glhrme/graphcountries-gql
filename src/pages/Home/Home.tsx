@@ -34,10 +34,11 @@ const Home: React.FC<PropsFromRedux> = ({ infos, addCountryInfo }) => {
   }, [data])
 
   const filteredInfos = useMemo(() => {
-    const filtered = infos.filter((item: CountryInfo) => item.name && item.name
-      .toLowerCase()
-      .includes(filterText.toLowerCase()
-    ))
+    const filtered = infos.filter((item: CountryInfo) => {
+      if(item.name.toLowerCase().includes(filterText.toLowerCase())) return true
+      if(item.nativeName.toLowerCase().includes(filterText.toLowerCase())) return true
+      return false
+    })
     return filtered
   }, [infos, filterText])
 
