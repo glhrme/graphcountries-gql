@@ -41,6 +41,10 @@ type Country = {
   }>,
   alternativeSpellings: Array<{
     name: string
+  }>,
+  distanceToOtherCountries: Array<{
+    distanceInKm: string,
+    countryName: string
   }>
 }
 

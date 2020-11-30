@@ -60,6 +60,10 @@ const CountryInfoQuery = () => {
         alternativeSpellings {
           name
         }
+        distanceToOtherCountries(first: 5) {
+          distanceInKm
+          countryName
+        }
       }
     }
 

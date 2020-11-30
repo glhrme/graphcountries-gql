@@ -83,6 +83,15 @@ const Details: React.FC<Props> = ({ match: { params: { name }}, infosMap }) => {
                   }
                   </ul>
                 </Typography>
+                <Divider />
+                <Typography>Paises mais próximos</Typography>
+                <ol>
+                  {countryInfo.distanceToOtherCountries.map((item: any) => (
+                    <li>
+                      <Typography component="span">{item.countryName} - {item.distanceInKm}Km</Typography>
+                    </li>
+                  ))}
+                </ol>
                 <WrapperButtonGroup>
                   <ButtonGroup
                     variant="contained"

@@ -17,6 +17,7 @@ const infoCountries = (state: stateType = initialState, action: action) => {
         mapState: mapInfo
       } 
       state = draft
+      console.log(state)
       return state
     }
     case actions.edit: {
