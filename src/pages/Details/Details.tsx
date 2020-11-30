@@ -77,7 +77,7 @@ const Details: React.FC<Props> = ({ match: { params: { nativeName }}, infosMap }
                   {
                     countryInfo.topLevelDomains.map(item => {
                       return (
-                        <li>{item.name}</li>
+                        <li key={countryInfo.name}>{item.name}</li>
                       )
                     })
                   }
@@ -95,10 +95,18 @@ const Details: React.FC<Props> = ({ match: { params: { nativeName }}, infosMap }
           </WrapperInfo>
         </Grid>
         <Modal
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column'
+          }}
           open={opened}
           onClose={() => setOpened(false)}
         >
-          <EditInfo />
+          <EditInfo
+            nativeName={nativeName}
+          />
         </Modal>
       </WrapperContent>
     )
