@@ -8,7 +8,7 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route path='/' exact component={Home} />
-      <Route path='/details'>
+      <Route path='/details' exact>
         <Redirect to='' />
       </Route>
       <Route path='/details/:nativeName' component={Details} />
